@@ -1,0 +1,1579 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{url}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+CMOS compatible platform for fabrication of atomic scale devices 
+\end_layout
+
+\begin_layout Author
+Tomáš Škereň
+\begin_inset Formula $^{1}$
+\end_inset
+
+, Nikola Pascher
+\begin_inset Formula $^{1}$
+\end_inset
+
+, Arnaud Garnier
+\begin_inset Formula $^{2}$
+\end_inset
+
+, Patrick Reynaud
+\begin_inset Formula $^{2}$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+Aurelie Thuaire
+\begin_inset Formula $^{2}$
+\end_inset
+
+, Xavier Jehl
+\begin_inset Formula $^{2}$
+\end_inset
+
+, Andreas Fuhrer
+\begin_inset Formula $^{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Address
+\begin_inset Formula $^{1}$
+\end_inset
+
+IBM Research – Zurich, Saumerstrasse 4, 8803 Ruschlikon, Switzerland
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $^{2}$
+\end_inset
+
+Commissariat à l’Energie Atomique, Laboratoire d’Électronique des Technologies
+ de l’Information, 38054 Grenoble, France
+\end_layout
+
+\begin_layout Abstract
+Atomic scale fabrication is an essential tool for exploring nanoscale physics.
+ One of the most promissing techniques is the scanning tunneling microscope
+ (STM) lithography which, however, comes at a cost of high process complexity,
+ requirements for dedicated equipment and long fabrication times.
+ We present a development of this technique which qualitatively simplifies
+ its application and substantially reduces the time requirements.
+ We achieve this by performing the STM lithography on dedicated, cleanroom-fabri
+cated SOI substrates which come with pre-reconstructed surface, pre-implanted
+ contacts and allow us to reintegrate the atomic scale devices back into
+ the CMOS process flow.
+ One critical benefit of our SOI architecture compared to conventional STM
+ lithography is the 2D nature of the device layer and inherent availability
+ of a high-quality planar gate which allows us to suppress substrate leakage
+ and operate the fabricated scale devices even at room temperature.
+ We demonstrate these benefits on an example of a 100nm wide Si:P nanowire.
+ 
+\end_layout
+
+\begin_layout Standard
+Fabrication of objects and devices on an atomic is considered to be one
+ of the holy grails of nanotechnology.
+ Besides approaches that allow us to create and interact with atomic scale
+ objects in a 'blind' way and with a limited control (e.g.
+ break junctions), the largest and most promising class of atomic scale
+ fabrication techniques is the probe based fabrication.
+ Ever since the invention of scanning tunneling microscope (STM) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Binnig1982"
+
+\end_inset
+
+, the probe based techniques provided superior imaging capabilities.
+ The famous IBM logo made of Xe atoms for the first time demonstrated the
+ ability of the probe microscopy to serve even as a tool for atomic scale
+ fabrication 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Eigler1990"
+
+\end_inset
+
+.
+ However, if we want to go beyong mere demonstration, much more severe requireme
+nts are imposed on the atomic scale fabrication - effective and quick creation
+ of stable and robust nanoscale objects, ideally not limited to ultra high
+ vacuum (UHV) and low temperature (LT) operation while providing handles
+ to bridge the gap between nano- and macroscopic world.
+ 
+\end_layout
+
+\begin_layout Standard
+One technique, that meets at least some of these criteria is the STM lithography.
+ This technique provides a way for creating highly doped areas in semiconductor
+ with atomic scale resolution and connecting them macroscopic world via
+ dopant based contacts.
+ It allows one to easily image the device 'under construction' and even
+ repair existing faults 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pavlicek2017"
+
+\end_inset
+
+.
+ Once the fabrication process is finished, the devices are encapsulated
+ in silicon which makes them extremely stable and robust.
+ This technique has been shown to be capable of deterministic placement
+ of single dopant atoms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fuechsle2012,Schofield2003"
+
+\end_inset
+
+, creating wires 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Weber2012"
+
+\end_inset
+
+ and dots 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pascher2016"
+
+\end_inset
+
+ with atomic scale dimensions and allowed for exploring the quantum properties
+ of the nanoscale systems.
+ It has even been proposed as a possible architecture for quantum computing
+ systems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Oberbeck2002"
+
+\end_inset
+
+.
+ On the other hand, this technique is extremely technically challenging,
+ it requires the use of a dedicated UHV setup equipped with a number of
+ specific tools and the process of device fabrication is itself very time
+ consuming, tedious and prone to failure.
+ As a result, only a handful of groups in the world is capable of using
+ this technique.
+ Morever, the nature of the samples that are typically used limits the dopant
+ device operation to low temperatures, below the critical temperature of
+ the low doped Si substrate (~below 30K).
+ 
+\end_layout
+
+\begin_layout Standard
+In this paper we present a development of this technique which allows for
+ its much more efficient application, minimizing the equipment requirements
+ and substanitally reducing the fabrication times.
+ In particular, we have developed dedicated substrates to perform the STM
+ lithography on.
+ These substrates are prepared on wafer scale in a cleanroom environment
+ using standard CMOS process steps.
+ They are equipped with localization markers and preimplanted contacts which
+ substantially reduce STM fabrication and sample post-processing times.
+ Each substrate is protected with a sacrificial Si cap which can be crack-opened
+ inside of the UHV setup exposing the reconstructed and hydrogen terminated
+ Si(001)-2
+\begin_inset Formula $\times$
+\end_inset
+
+1 surface with low defect density immediately suitable for STM patterning
+ without the need for any time-consuming in-situ surface preparation.
+ 
+\end_layout
+
+\begin_layout Standard
+Morever, the substrates have SOI structure which provides a direct possibility
+ to use the handle wafer as a planar gate which can be used to tune the
+ fermi level in the device layer.
+ Among other consequences, this allows us to suppress substrate leakage
+ and operate the dopant devices even at room temperature.
+ We demonstrate these properties on nanowire dopant devices fabricated on
+ these substrates.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/introduction_2.png
+	lyxscale 25
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Introduction"
+
+\end_inset
+
+The SOI substrates for STM lithography are entirely fabricated in the cleanroom
+ and protected with a sacrificial cap.
+ They can be opened in UHV and used for STM lithography without any surface
+ preparation steps.
+ Preimplanted contacts greatly reduce the fabrication and postprocessing
+ times and the SOI structure provides a high-quality gate to suppress substrate
+ leakage and allows room temperature operation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+RESULTS AND DISCUSSION
+\end_layout
+
+\begin_layout Standard
+In the following we first describe the process of STM lithography highlighting
+ the aspects and bottlenecks relevant for the work presented in this paper.
+ Next, we present the idea and advantages of using prefabricated substrates,
+ we describe their structure and fabrication process and we discuss the
+ main challenges related to the implamentation of this idea.
+ In the last part we show the procedure of dopant device fabrication on
+ the SOI substrates and we present electrical measurements of these dopant
+ devices.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Bottlenecks of the STM lithography 
+\end_layout
+
+\begin_layout Standard
+A typical process flow of the STM lithography is outlined in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Process-flow-of-STM_litho-1"
+
+\end_inset
+
+.
+ After a standard ex-situ cleaning procedure the Si sample is introduced
+ in the UHV system, it is degassed, flashed to about 
+\begin_inset Formula $1150^{\circ}\mathrm{C}$
+\end_inset
+
+ and subsequently H terminated which leads to formation of a Si:H(001)-2
+\begin_inset Formula $\times$
+\end_inset
+
+1 surface.
+ Desired areas are desorbed by means of the STM lithography, followed by
+ dosing with dopant precursor (typically phosphine), activation anneal and
+ encapsulation with intrinsic silicon layer.
+ In the second, ex-situ processing stage, the device is contacted typically
+ with the use of e-beam lithography.
+ The contacting involves precise device localization, through hole RIE etch
+ and fabrication of metallic contacts.
+ Finally, the device is placed in a chip carrier, wire bonded and measured.
+ 
+\end_layout
+
+\begin_layout Standard
+The STM desorption of the active area of the device, which is typically
+ less than a few hundrer nanometers in size, only takes a few minutes, up
+ to an hour for larger and more complex device designs.
+ However, the total processing time is substantially larger due to a number
+ of time consuming steps.
+ 
+\end_layout
+
+\begin_layout Standard
+First, the in-situ sample degas is typically performed overnight and is
+ followed by flash and H termination.
+ The H termination represents a substantial load for the pumping system
+ of the UHV setup due to limited H pumpuing capability of the ion pumps.
+ The STM lithography of the active device area is then performed but, subsequent
+ly, each electrical terminal has to be equipped with a contact pad of a
+ typical size of ~1x2um in order to make it accessible to the e-beam lithography.
+ Limited STM tip velocity and finite time required for effective H desorption
+ means that fabrication of every contact pad adds to the total fabrication
+ time (1-2 hours/pad).
+ Longer device writing times not only complicate the fabrication logistics
+ but represent another fundamental problem.
+ Surface areas that have been desorbed become substantially more reactive
+ and are prone to collect contamination from the residual atmosphere and/or
+ released from the STM tip.
+ Finally, the e-beam postprocessing of the samples represents another time-consu
+ming step.
+ Devices have to be precisely localized, each e-beam contact design is unique,
+ all the chemical processing happens on a chip level, which complicates
+ sample handling and causes many practical problems (e.g.
+ edge bead from spin coating).
+ 
+\end_layout
+
+\begin_layout Standard
+The STM lithography performed on standard, low-doped Si substrates imposes
+ another fundamental limitation on the performance of the dopant device.
+ The 3D substrate conductivity is typically much higher than that of the
+ dopant device and all electrical measurements have to be performed at cryogenic
+ temperatures where conductivity of the substrates freezes.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/STM_litho2.png
+	lyxscale 30
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Process-flow-of-STM_litho-1"
+
+\end_inset
+
+The process flow of hydrogen resist lithography.
+ Hydrogen from a) H-terminated Si(001):2x1 surface is locally b) desorbed
+ with STM tip.
+ After c) dosing with a dopant gas the precursor molecules d) selectively
+ adhere to the desorbed areas and become e) incorporated in Si lattice after
+ activation anneal.
+ f) The sample is overgrown with intrinsic Si for device encapsulation.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+SOI substrates
+\end_layout
+
+\begin_layout Standard
+In order to alleviate the bottlenecks of the STM lithography we have developed
+ specialized substrates to serve as a platform for this technique.
+ They are entirely fabricated in a cleanroom environment at CEA LETI and
+ they have these key characteristics: 
+\end_layout
+
+\begin_layout Enumerate
+They contain multiple sets of preimplanted contacts which can be localized
+ with the STM
+\end_layout
+
+\begin_layout Enumerate
+Possibility to reintegrate the STM fabricated devices into CMOS process
+ flow
+\end_layout
+
+\begin_layout Enumerate
+Low defect density Si(001)-(2x1) reconstructed and H-terminated surface
+ compatible with the STM lithography
+\end_layout
+
+\begin_layout Enumerate
+Suppressed substrate leakage thanks to the 2D nature of the SOI structure
+ and, moreover, ability to tune the carrier density by means of the backgate
+\end_layout
+
+\begin_layout Standard
+The existence of the preimplanted contacts substantially reduces the STM
+ patterning time as well as sample post-processing.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+a) shows the structure of these implants and figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+d) shows the SEM image of a device position with two n-type and two p-type
+ implants.
+ The finger implants (Zone II) run towards the center of the device position
+ and can be as close as 600nm to one another.
+ This provides sufficient space for the patterning of the active part of
+ a dopant device but at the same time, it is convenient and fast to pattern
+ a connection from the dopant device to the implants.
+ On the outer side, the implants are connected to large, 10um sized Zone
+ I implants to facilitate the post-processing.
+ Fixed position and large size of these Zone I pads makes it possible to
+ use optical lithography for the contact processing and and it makes it
+ possible to reintegrate the sample back into the CMOS process flow 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thuaire2016"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The third characteristic aims at reducing in-situ sample surface preparation
+ time and it is also required, because conventional Si surface preparation
+ method (flashing to temperatures above 
+\begin_inset Formula $1150^{\circ}\mathrm{C}$
+\end_inset
+
+) is problematic with the SOI samples and it is not compatible with the
+ presence of the contact implants.
+ The prefabricated substrate can be inserted in the UHV system and it can
+ be immediately used for STM lithography without the need for any further
+ surface preparation procedure.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to achieve sufficient surface quality we developed a specialized
+ process in the reduced pressure CVD reactor 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hartmann2002"
+
+\end_inset
+
+.
+ The surface reconstruction step is performed at a temperature of 
+\begin_inset Formula $950^{\circ}\mathrm{C}$
+\end_inset
+
+ which is sufficiently low to prevent substantial dopant diffusion.
+ Although H-terminated silicon surface is relatively inert, samples exposed
+ to ambient conditions turned out not to be compatible with the STM lithography.
+ To solve this issue, the reconstructed substrates are covered with a sacrificia
+l Si cap which undergoes the same surface reconstruction procedure.
+ This is achieved by hydrophobic bonding of the substrate and cap wafer
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rauer2013"
+
+\end_inset
+
+, which is followed by the last step - dicing.
+ 
+\end_layout
+
+\begin_layout Standard
+These sandwitch samples are then transfered to UHV environment where the
+ cap is removed by pressing a molybdenum blade against the cleavage between
+ the sample and the cap.
+ In practice, we briefly heat the substrates afer opening to about 
+\begin_inset Formula $300^{\circ}\mathrm{C}$
+\end_inset
+
+ in order to get rid of the gas adsorbed on the sample holder and chip itself.
+ This step does not influence the surface quality but is mostly a precaution
+ in order to protect the STM from accumulation of contamination and it can
+ be performed in less than 2 hours.
+ 
+\end_layout
+
+\begin_layout Standard
+Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+b,c and e) show typical STM micrographs of the resulting sample surface.
+ Fo the STM dopant device fabrication it is critical that both pristine,
+ unimplanted surface (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+e)) as well as boron (b)) and phosphorus (c)) implanted areas have suitable
+ surface quality.
+ In order to keep the surface quality of the implanted areas high enough
+ we introduced the concept of Zone I and Zone II implants (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+a)).
+ The Zone I implants receive much higher implantation dose at higher energy
+ in order to span across the whole device layer thickness.
+ This is required for the backside contact processing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thuaire2016"
+
+\end_inset
+
+.
+ However, it proved difficicult to keep the surface surface quality good
+ enough at such a high implantation dose.
+ For this reason, the finger implants, where STM patterning takes place,
+ are only shallow extensions where lower dose at a lower energy is required.
+ 
+\end_layout
+
+\begin_layout Standard
+An ultimate criterium for the surface quality is the ability to desorb the
+ hydrogen resist with the STM.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-surface"
+
+\end_inset
+
+f) shows an example of a desorbed pattern (a quantum dot with two tunnel
+ barrier contacts) and proves that is possible to perform STM lithography
+ on these substrates.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/sample_characterization.png
+	lyxscale 30
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:STM-surface"
+
+\end_inset
+
+a) Structure and d) SEM image of the contact implants.
+ STM images of the sample surface over the b) phosphorus and c) boron Zone
+ II implants.
+ e) STM image of the sample surface in the device area and f) an example
+ of STM patterning on the SOI substrate.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Fabrication of nanowires on the SOI substrates
+\end_layout
+
+\begin_layout Standard
+In order to fabricate the dopant devices on the SOI substrates the position
+ of the preimplanted contacts has to be precisely localized first.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-image"
+
+\end_inset
+
+ outlines the localization and writing procedure.
+ 
+\end_layout
+
+\begin_layout Standard
+First, the STM tip is brought close to the center of the desired device
+ position using the optical microscope build in the STM setup.
+ Long linear STM scans are used to find the localization markers in both
+ directions.
+ The 10um scan range of the STM proved to be sufficient to easily find these
+ markers and localize the device position with typically less than 5 tip
+ approaches.
+ A large overview scan is then performed (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-image"
+
+\end_inset
+
+a)).
+ This scan shows both the localization markers (top, right and bottom) as
+ well as the finger implants.
+ These are easily recognizable thanks to a few monolayer deep depression
+ resulting from the ion implantation process.
+ After correct positioning of the STM scanning field the desorption of the
+ desired pattern is performed.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-image"
+
+\end_inset
+
+d) shows an STM image of the device position after desorbing a 100nm wide
+ nanowire and figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:STM-image"
+
+\end_inset
+
+e) shows a detailed image of the desorbed pattern.
+ The total duration of the localization procedure was less than an hour
+ (from introduction of the sample in the STM stage until the start of the
+ STM patterning) and the nanowire writing time was of a similar duration.
+\end_layout
+
+\begin_layout Standard
+After the STM patterning step, the standard processing of the sample was
+ performed, including dosing with phosphine, activation anneal and overgrowth
+ with 20nm layer of intrinsic Si at 290C.
+ After taking the sample out of the UHV system, Al contacts were fabricated
+ using e-beam lithography and the sample was glued in a chip carrier using
+ conductive epoxy in order to be able to apply voltage to the backgate (handle
+ wafer).
+ Since the handle wafer was non-degenerately doped, the chip carrier was
+ additionally equipped with an LED in order to be able to create mobile
+ charge carriers for gate voltage application at low temperatures.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/device_writing.png
+	lyxscale 30
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:STM-image"
+
+\end_inset
+
+a) STM image of the typical SOI surface.
+ b-c) The procedure of localization of the preimplanted contants.
+ d) STM desorbed area for the fabrication of a nanowire.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Electrical measurements
+\end_layout
+
+\begin_layout Standard
+The two-dimensional nature of the SOI device layer suppresses the problem
+ of substrate leakage present in dopant devices fabricated on bulk substrates.
+ This leakage typically prohibits any electrical transport measurements
+ on STM dopant devices above the substrate critical temperature.
+ 
+\end_layout
+
+\begin_layout Standard
+Besides having inherently lower substrate leakage, the SOI samples also
+ posses another desired feature.
+ The handle wafer can be naturally used as an in-plane gate.
+ 
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Backgate"
+
+\end_inset
+
+ a) shows the action of an SOI backgate on the electrical transport at 1.8K
+ through STM defined nanowires and a comparison to the behavior of blank
+ positions with no dopant device.
+ For 0V gate bias, all the four measured positions appear to be conductive
+ with a resistance of a few 
+\begin_inset Formula $\mathrm{k\Omega}$
+\end_inset
+
+.
+ However, as negative voltage is applied to the backgate, the resistance
+ of the blank positions increases beyond the range of the measurement setup,
+ while the resistance of the nanowires saturates at values of 
+\begin_inset Formula $\mathrm{7\,k\Omega}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{11\,k\Omega}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+By applying the voltage to the gate we effectively shift the Fermi level
+ in the device layer.
+ The ratio between the physical Fermi level shift and the applied gate bias
+ is given by the backgate lever arm.
+ The behavior of the blank positions suggests that for gate biases between
+ about -8V and -25V the Fermi level is located within the band gap of the
+ device layer.
+ This causes that there are no mobile charge carriers available for the
+ transport and the device layer becomes effectively insulating.
+ For higher/lower gate biases the Fermi level enters the conduction/valence
+ band and electrons/holes mediate the charge transport through the device
+ layer.
+ The fact that for 0V gate bias the Fermi level is in the conduction band
+ is given by the fact that the SOI substrates contain positive charges trapped
+ in the Si-oxide interface which effectively offsets the Fermi level in
+ the device layer.
+ 
+\end_layout
+
+\begin_layout Standard
+For the positions where STM defined nanowires are present, the transport
+ through these nanowires is not affected by the gate action since their
+ doping density is many orders of magnitude higher and they basicaly form
+ parallel transport channel to the substrate leakage.
+ As a consequence, by applying backgate bias in the window between -8 and
+ -25V we can suppress the transport through the substrate and only measure
+ the nanowire electrical properties.
+ 
+\end_layout
+
+\begin_layout Standard
+The ability to tune the fermi level in the device layer with the backgate
+ has an additional, important consequence.
+ The electrical transport measurements of these dopant devices are no longer
+ limited to cryogenic temperatures, since the carrier freeze-out is no longer
+ required to suppress the substrate leakage.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Backgate"
+
+\end_inset
+
+b) shows the resistance measurements of the same samples as in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Backgate"
+
+\end_inset
+
+a) as a function of the backgate voltage but performed at room temperature.
+ Qualitatively the same trend can be observed as for 1.8K, only the voltage
+ interval where the substrate leakage is suppressed is narrower than at
+ 1.8K.
+ This is a simple consequence of higher thermal excitation of charge carriers
+ at RT, however, there is still a clear gate bias window where the substrate
+ leakage is sufficiently low to be able to measure electrical transport
+ through the dopant device only.
+ 
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Magnetoresistance-NW"
+
+\end_inset
+
+ shows magnetotransport measurements through one of the nanowires at a fixed
+ backgate voltage of -15V and at temperature varying from 1.6 up to 40K.
+ These measurements show characteristic weak localization peak which shrinks
+ with increasing temperature as well as pronounced osciallations of the
+ resistance at larger magnetic field which we interprete as universal conductanc
+e fluctuations.
+ These features have been previously associtated with electrical transport
+ through similar nanowires and they further confirm, that the dopant devices
+ fabricated on the SOI substrates are electrically active.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/gate_sweeps.png
+	lyxscale 20
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Backgate"
+
+\end_inset
+
+Influence of the backgate on the electrical transport through STM defined
+ Si:P nanowires and blank positions at a) 1.8K and b) room temperature.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/magnetoresistance.png
+	lyxscale 20
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Magnetoresistance-NW"
+
+\end_inset
+
+Magnetoresistance of the STM defined nanowire as a function of the temperature.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+CONCLUSIONS
+\end_layout
+
+\begin_layout Standard
+We have developed specialized SOI substrates that facilitate the use STM
+ lithography.
+ These substrates are entirely fabricated in cleanroom environment, then
+ equipped with a protective cap which can be removed in-situ.
+ We showed that such samples are stable in ambient conditions and, once
+ opened in UHV, they possess high quality 2x1-reconstructed and hydrogen
+ terminated surface compatible with the STM lithography.
+ 
+\end_layout
+
+\begin_layout Standard
+We demonstrated fabrication of dopant devices on these substrates and we
+ investigated their electrical properties.
+ Thanks to the preimplanted contacts, the STM patterning as well as sample
+ postprocessing times are substantially reduced.
+ Moreover, the SOI structure of the substrates provides a direct possibility
+ to use the handle layer as a planar gate and tune the charge carrier density
+ in the device layer.
+ We show that this allows us to fully deplete the device layer of mobile
+ charge carriers and suppress any leakage and, conseqeuntly, measure electrical
+ transport through the dopant device even at room temperature.
+ 
+\end_layout
+
+\begin_layout Section*
+METHODS
+\end_layout
+
+\begin_layout Standard
+To be adapted...
+\end_layout
+
+\begin_layout Standard
+The substrates for STM lithography were fabricated at CEA LETI.
+ 
+\end_layout
+
+\begin_layout Standard
+Substrates were mounted on a custom made UHV comaptible sample holder.
+ This holder clamped the substrate from the sides exposing leaving the gap
+ between the substrate and the cap clear for inserting the opening molybdenum
+ blade.
+ After introducing the sample in the UHV chamber a brief degassing procedure
+ to 300
+\begin_inset Formula $^{\circ}$
+\end_inset
+
+C was performed and, subsequently, the cap was removed by pushing the Mo
+ blade in the gap between the sample and the cap.
+ Immediately after the opening, the sample was introduced in the STM stage
+ for the STM lithography.
+ 
+\end_layout
+
+\begin_layout Standard
+After performing the STM lithography, our standard doping procedure was
+ followed.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pascher2016"
+
+\end_inset
+
+ The sample was exposed to a 10L dose of phosphine gas, activation anneal
+ of 1min at 340C was performed and the sample was overgrown with 20nm layer
+ of intrinsic Si at a temperature of 270C.
+ 
+\end_layout
+
+\begin_layout Standard
+Electrical transport measurements were performed in a custom made variable
+ temperature insert system alowing for measurements from room temperature
+ down to 1.6K.
+ 
+\end_layout
+
+\begin_layout Section*
+ACKNOWLEDGEMENTS
+\end_layout
+
+\begin_layout Standard
+This work was supported by SiAM and PAMS project.
+ 
+\end_layout
+
+\begin_layout Standard
+Daniel Widmer (or co-author?) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibtex/My Collection"
+options "ieeetr"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Additional Material
+\end_layout
+
+\begin_layout Subsection*
+Possible titles
+\end_layout
+
+\begin_layout Standard
+Integration of STM device fabrication in CMOS process flow
+\begin_inset Newline newline
+\end_inset
+
+STM atomic scale device fabrication integrated in the CMOS process flow
+\begin_inset Newline newline
+\end_inset
+
+Improving STM lithography efficiency by using SOI substrates and CMOS compatible
+ process
+\end_layout
+
+\begin_layout Subsection*
+Potential co-authors
+\end_layout
+
+\begin_layout Standard
+Dani Widmer, Patrick Reynaud, Xavier Jehl
+\end_layout
+
+\begin_layout Subsection*
+Figures
+\end_layout
+
+\begin_layout Subsubsection*
+Motivation
+\end_layout
+
+\begin_layout Standard
+Long time to fabricate STM device
+\end_layout
+
+\begin_layout Standard
+Cumbersome ebeam contacting 
+\end_layout
+
+\begin_layout Subsubsection*
+Reintegration cycle
+\end_layout
+
+\begin_layout Standard
+SOI - markers - implants - reconstruction - capping - transfer to UHV -
+ opening - localization - lithography - dosing - activation - overgrowth
+\end_layout
+
+\begin_layout Subsubsection*
+Device fabrication process
+\end_layout
+
+\begin_layout Subsubsection*
+Surface quality
+\end_layout
+
+\begin_layout Standard
+From bad to the best 
+\end_layout
+
+\begin_layout Subsubsection*
+Electrical properties of the SOI substrates 
+\end_layout
+
+\begin_layout Standard
+Conductive at room temperature, gate action, (magnetoresistance?) 
+\end_layout
+
+\begin_layout Subsubsection*
+Device fabrication process
+\end_layout
+
+\begin_layout Standard
+Localization - Implantation -> topography, lozalizaion of the central region
+\end_layout
+
+\begin_layout Standard
+Nanowire fabrication
+\end_layout
+
+\begin_layout Subsubsection*
+Nanowire electrical measurements
+\end_layout
+
+\begin_layout Standard
+Temperature dependence of the WL peak
+\end_layout
+
+\begin_layout Standard
+Gate dependence? 
+\end_layout
+
+\begin_layout Standard
+IV curves? 
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/STM_litho_outline.png
+	lyxscale 50
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Process-flow-of-STM_litho"
+
+\end_inset
+
+Process flow of hydrogen resist lithography.
+ Hydrogen from a) H-terminated Si(001):2x1 surface is locally b) desorbed
+ with STM tip.
+ After c) dosing with a dopant gas the precursor molecules d) selectively
+ adhere to the desorbed areas and become e) incorporated in Si lattice after
+ activation anneal.
+ f) The sample is overgrown with intrinsic Si for device encapsulation.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Figure - process flow of STM device fabrication?
+\end_layout
+
+\begin_layout Plain Layout
+The STM lithography is performed on SOI substrates which contain localization
+ markers and preimplanted electrical contacts.
+ These substrates are prepared in a cleanroom enviroment, processed on a
+ wafer scale, bonded to a protective silicon cap and finally diced.
+ The substrate is processed to have 2x1 reconstruction and is H terminated.
+ The protective cap cap be removed from the sample surface once after introducti
+on to the UHV system, which allows to keep the samples in ambient enviroment
+ for arbitrary amount of time.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+STM lithography can be performed immediately removing the sample cap without
+ the need for any additional in-situ surface preparation steps.
+ Preimplanted contacts are only few hundred nanometers apart which means
+ that no time-consuming contact pad fabrication is necessary.
+ Finally, the contacting of the dopant device can be performed by optical
+ lithography.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Hydrogenated surface compatible with STM
+\end_layout
+
+\begin_layout Itemize
+Preimplanted contact for STM defined dopant devices
+\end_layout
+
+\begin_layout Itemize
+Backgate
+\end_layout
+
+\begin_layout Itemize
+Reinctegrationplus
+\end_layout
+
+\begin_layout Itemize
+2D susbtrate - less leakage - possibly higher temperature operation
+\end_layout
+
+\begin_layout Standard
+We proposed a reintegration cycle: 
+\end_layout
+
+\begin_layout Enumerate
+SOI sample preparation at CEA
+\end_layout
+
+\begin_layout Enumerate
+Transfer to UHV, STM lithography
+\end_layout
+
+\begin_layout Enumerate
+Electrical contacting - e-beam, ultimately cleanroom process
+\end_layout
+
+\begin_layout Standard
+The alternative process flow represented a number of challenges compared
+ to the conventional STM lithography.
+ First step 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename pictures/reintegration_cycle.png
+	lyxscale 20
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Reintegration-cycle-of-2"
+
+\end_inset
+
+Reintegration cycle of the STM lithography into CMOS process flow
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+Besides the sample implantation 
+\end_layout
+
+\begin_layout Standard
+The SOI samples feature a 200nm thick device layer with a boron background
+ doping and a conductivity of 
+\begin_inset Formula $10\mathrm{\Omega\cdot cm}$
+\end_inset
+
+.
+ Burried oxide (BOX) layer is 400nm thick and below is a low B doped handle
+ wafer.
+ 
+\end_layout
+
+\begin_layout Standard
+Handling these samples in a UHV system also represented a few challenges.
+ In order to be able to crack-open the cap-protected samples in-situ, we
+ had to design a dedicated sample holder.
+ 
+\end_layout
+
+\begin_layout Standard
+The samples 
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Subsection*
+Sample surface quality and patterning 
+\end_layout
+
+\begin_layout Standard
+Perform STM lithography on the SOI samples imposes high requirements for
+ the sample surface quality.
+ In particular, the atomic terrace width should be reasonably large (at
+ least 10s of nanometers), the surface should have a 2x1 reconstruction
+ with low defect concentration, the surface should be hydrogen terminated
+ with low concentration of dangling bonds and the concentration of contaminants
+ should be low.
+ In the past, SOI substrates have been developed at CEA with sufficient
+ surface quality.
+ 
+\end_layout
+
+\begin_layout Standard
+- used in work of Kolmer, other? 
+\end_layout
+
+\begin_layout Standard
+- additional challenge - surface quality of the implanted areas - not investigat
+ed before - additional contraint on the thermal processing - no diffusion
+ of dopants 
+\end_layout
+
+\begin_layout Standard
+- Contacting from the backside - deep implants, high dose - proved impossible
+ to preserve reasonable surface quality.
+ 
+\end_layout
+
+\begin_layout Standard
+- Zone I and Zone II - deep + shallow finger implants - lower energy and
+ dose required
+\end_layout
+
+\begin_layout Standard
+These requirements have to be fulfilled not only for the original SOI surface
+ but after the ion implantation as well.
+ 
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Standard
+.
+\end_layout
+
+\begin_layout Subsection*
+Storyline
+\end_layout
+
+\begin_layout Itemize
+Scan on SOI substrates (surface quality, electrical contact) 
+\end_layout
+
+\begin_layout Itemize
+H desorption on SOI substrates (not on p-type) 
+\end_layout
+
+\begin_layout Itemize
+Efficient localization of the device position
+\end_layout
+
+\begin_layout Itemize
+Tuning conductivity of the device layer by backgate from RT down to LT 
+\end_layout
+
+\begin_layout Itemize
+Operation of a nanowire device at temperature from RT down to 1.6K 
+\end_layout
+
+\end_body
+\end_document
